@@ -1,0 +1,8 @@
+<ng-container *ngIf="resources">
+    <mat-list *ngFor="let resource of resources">
+        <mat-list-item>
+            <ui-discovery-icons [fileType]="resource['mimetype']" [iconSize]="iconSize"></ui-discovery-icons>
+            <span [matBadge]="resource['count']" matBadgeOverlap="false" matBadgeColor="primary"></span>
+        </mat-list-item>
+    </mat-list>
+</ng-container>

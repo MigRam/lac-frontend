@@ -1,0 +1,54 @@
+<section *ngIf="bundleData$ | async as bundle; else showLoader">
+    <mat-card *ngFor="let data of bundle.getDataset()">
+        <span mat-card-avatar>
+            <ui-discovery-icons [fileType]="data.getType()" [iconSize]="'2x'"></ui-discovery-icons>
+        </span>
+        <mat-card-title>
+            <h1 class="mat-headline" [innerHTML]="data.getTitle()"></h1>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <label class="label">Belongs To Collection:</label>
+            <button mat-button [innerHTML]="data?.getProjectName()"
+                (click)="viewCollection(data.getRouteParent())"></button>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            <mat-chip-list>
+                <mat-chip *ngFor="let keyword of data?.getKeywords()" color="isKeyword" selected>
+                    <span [innerHTML]="keyword"></span>
+                </mat-chip>
+                <mat-chip *ngFor="let language of data?.getLanguages()" color="isLanguage" selected>
+                    <span [innerHTML]="language"></span>
+                </mat-chip>
+                <mat-chip *ngFor="let country of data?.getCountry()" color="isLocation" selected>
+                    <span [innerHTML]="country"></span>
+                </mat-chip>
+                <mat-chip *ngFor="let location of data?.getLocation()" color="isLocation" selected>
+                    <span [innerHTML]="location"></span>
+                </mat-chip>
+                <mat-chip *ngFor="let region of data?.getRegion()" color="isLocation" selected>
+                    <span [innerHTML]="region"></span>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <span class="mat-body-1" matLine [innerHTML]="data?.getDescription()"></span>
+        </mat-card-content>
+        <mat-card-actions>
+            <ui-discovery-resource-icons [resource]="data?.getResourceMimeType()" [iconSize]="'2x'">
+            </ui-discovery-resource-icons>
+        </mat-card-actions>
+        <mat-card-content>
+            <p>
+                <fa-icon [icon]="faUnLock" [size]="'2x'"></fa-icon>
+                Open - the data in this bundle is accessible to you. Please read the
+                <a [routerLink]="['/docs/terms-of-use']">Terms of Use</a>.
+            </p>
+        </mat-card-content>
+        <mat-card-content *ngIf="bundleFiles$ | async as childFiles; else showLoader">
+            <frontend-discovery-files-table [data]="childFiles.getFileParentOf()" (resourceEmitter)="viewResource($event)"></frontend-discovery-files-table>
+        </mat-card-content>
+        <ng-template #showLoader>
+          <mat-spinner diameter="25" color="warn"></mat-spinner>
+        </ng-template>
+    </mat-card>
+</section>

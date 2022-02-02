@@ -1,0 +1,12 @@
+.discovery {
+  border: solid 1px #00b1b3;
+  height: 40vh;
+  width: auto;
+}
+
+.mini {
+  margin: 15px auto;
+  border: solid 1px #00b1b3;
+  height: 30vh;
+  width: 15vw;
+}

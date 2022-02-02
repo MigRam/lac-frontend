@@ -1,0 +1,37 @@
+<div class="annotation-text-list" *ngIf="odataCanvas && odataLayers"
+     style="width: 100%; overflow-x: scroll;"
+     draggable="true"
+     (dragstart)="onDragStart($event)"
+     (dragend)="onDragEnd($event)"
+     (drag)="onDrag($event)"
+     (scroll)="emitScroll()"
+     (mousedown)="onMouseDown()"
+     (mouseup)="onMouseUp()"
+     #viewChildLayers>
+    <span class="cursor">&#160;</span>
+    <div class="annotation-text"
+         style="position: relative; margin-left: 50%;"
+         [style.width.px]="viewBoxWidth * zoomFactor"
+         *ngIf="visibleResources">
+        <div *ngFor="let layer of odataLayers; let i = index"
+             [style.width.px]="viewBoxWidth * zoomFactor"
+             [style.backgroundColor]="i % 2 == 0 ? 'lightgray': 'white'"
+             style="position: relative; overflow: hidden; display: block; line-height: 2em;">&#160;
+          <div *ngFor="let annotation of visibleResources[layer.id][tile - 1]"
+               style="position: absolute; top: 0px; height: 100%; overflow: hidden; border-left: solid red 1px; border-right: solid blue 1px;"
+               [style.width.px]="annotation.selector.length / 10 * zoomFactor"
+               [style.left.px]="annotation.selector.offset / 10 * zoomFactor"
+               [id]="annotation.label">{{annotation.bodyValue}}&#160;</div>
+          <div *ngFor="let annotation of visibleResources[layer.id][tile]"
+                style="position: absolute; top: 0px; height: 100%; overflow: hidden; border-left: solid red 1px; border-right: solid blue 1px;"
+                [style.width.px]="annotation.selector.length / 10 * zoomFactor"
+                [style.left.px]="annotation.selector.offset / 10 * zoomFactor"
+                [id]="annotation.label">{{annotation.bodyValue}}&#160;</div>
+          <div *ngFor="let annotation of visibleResources[layer.id][tile + 1]"
+               style="position: absolute; top: 0px; height: 100%; overflow: hidden; border-left: solid red 1px; border-right: solid blue 1px;"
+               [style.width.px]="annotation.selector.length / 10 * zoomFactor"
+               [style.left.px]="annotation.selector.offset / 10 * zoomFactor"
+               [id]="annotation.label">{{annotation.bodyValue}}&#160;</div>
+        </div>
+    </div>
+</div>

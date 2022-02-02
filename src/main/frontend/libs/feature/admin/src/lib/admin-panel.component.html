@@ -1,0 +1,41 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Admin Dashboard</h1>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Important Links</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+            <button mat-flat-button color="primary" [routerLink]="['./a5-docs']">A5 Core Api Documentation</button>
+            <button mat-flat-button color="primary">
+                <a href="https://gitlab.cceh.uni-koeln.de/migram/lac-client" target="_blank">Gitlab Repository</a>
+            </button>
+            <button mat-flat-button color="primary">
+                <a href="https://redmine.uni-koeln.de/projects/ka3/wiki" target="_blank"> Project Redmine Wiki </a>
+            </button>
+            <button mat-flat-button color="primary">
+                <a href="https://grails-serve.rrz.uni-koeln.de/jenkins/" target="_blank"> Jenkins Deployment </a>
+            </button>
+        </mat-card-content>
+    </mat-card>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div> add content here </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

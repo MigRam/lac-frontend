@@ -1,0 +1,17 @@
+:host .annotation-text {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+:host .cursor {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: orangered;
+  z-index: 9999;
+}
+
+:host .annotation-text-list {
+  margin: 0px !important;
+  padding: 0px !important;
+}

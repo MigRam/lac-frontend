@@ -1,0 +1,21 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row" style="background: #f8f8f8">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md8 col-lg-8">
+      <h4 class="title">{{'Explore Hits' | uppercase}}</h4>
+      <explore-search-field></explore-search-field>
+    </div>
+    <div class="col-md-2 col-lg-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-lg-2"></div>
+    <div class="col-md8 col-lg-8">
+      <explore-search-hits *ngIf="exploreService.isHits()"></explore-search-hits>
+      <explore-search-hit *ngIf="exploreService.isHit()"></explore-search-hit>
+    </div>
+    <div class="col-md-2 col-lg-2"></div>
+  </div>
+</div>

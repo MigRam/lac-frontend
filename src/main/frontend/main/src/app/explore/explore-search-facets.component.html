@@ -1,0 +1,85 @@
+<ul class="nav nav-tabs">
+  <li class="dropdown"
+      *ngFor="let act of active">
+    <div class="btn-group">
+      <button type="button" class="btn btn-link"
+              (click)="toggle(act)">
+        <span class="fa fa-hand-o-right"
+              *ngIf="has(act)"></span> {{act}}
+      </button>
+      <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li *ngIf="!isShown(act)"
+            (click)="show(act)"><a>Show</a></li>
+        <li *ngIf="isShown(act)"
+            (click)="hide(act)"><a>Hide</a></li>
+        <li (click)="deselect(act)"
+            [class.disabled]="!has(act)"><a>Reset</a></li>
+        <li *ngIf="isShown(act)"
+            [class.disabled]="false"><a>More</a></li>
+      </ul>
+    </div>
+  </li>
+  <li class="dropdown pull-right">
+    <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="fa fa-bars"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a (click)="deselect()">Reset all</a></li>
+      <li role="separator" class="divider"></li>
+      <li *ngFor="let al of all">
+        <a (click)="onActive(al)">
+          <span>{{al}}</span>
+          <input type="checkbox" class="pull-right"
+                 [checked]="isActive(al)">
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane" style="margin: 20px"
+       *ngFor="let facet of exploreService.facets.compiled()"
+       id="{{facet.faceName}}"
+       [class.active]="isShown(facet.faceName)"
+       [hidden]="!isShown(facet.faceName)">
+    <div class="row">
+      <div class="col-md-4"
+           *ngFor="let page of [0, 1, 2]">
+        <ul class="list-group">
+          <li class="list-group-item"
+              *ngFor="let bucket of bucketPage(facet.buckets, page)">
+            <input type="checkbox"
+                   (change)="onSelect($event.target.checked, facet.faceName, bucket.key)"
+                   [checked]="isChecked(facet.faceName, bucket.key)">
+            <a (click)="selectOne(facet.faceName, bucket.key)">{{bucket.key}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-right">
+      <button type="button" class="btn btn-primary btn-sm"
+          (click)="hide(facet.faceName)">OK</button>
+    </div>
+  </div>
+</div>
+<div>
+  <span *ngFor="let fil of filter; let i = index">
+    <button class="btn btn-xs btn-danger"
+            *ngFor="let bucket of filter[i]">
+      <span *ngIf="operator[i] === false">
+        <span>{{name(i)}}: <del>{{bucket}}</del></span>
+        <span class="fa fa-remove"
+              (click)="select(name(i), bucket)"></span>
+      </span>
+      <span *ngIf="operator[i] === true">
+        <span>{{name(i)}}: {{bucket}}</span>
+        <span class="fa fa-remove"
+              (click)="deselect(name(i), bucket)"></span>
+      </span>
+    </button>
+    <span>   </span>
+  </span>
+</div>

@@ -1,0 +1,11 @@
+<div class="annotation-text-list">
+  <div *ngFor="let layer of odataLayers; let i = index" style="line-height: 2em;"
+       class="text-right"
+       [style.backgroundColor]="i % 2 == 0 ? 'lightgray': 'white'">{{layer.label}}
+    <small class="pull-left">
+      <span style="display: inline-block;"
+          *ngFor="let x of array(levels[i])">—</span>
+      <span class="label label-info">{{layer.type[3].split("@").pop()}}</span>
+    </small>
+  </div>
+</div>

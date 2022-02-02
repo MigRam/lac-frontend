@@ -1,0 +1,40 @@
+<div style="width: 100%; overflow: hidden;"
+     #viewChildTiles>
+  <span class="cursor" style="height: 400px;">&#160;</span>
+  <div style="margin-left: 50%;"
+       [style.width.px]="viewBoxWidth * zoomFactor"
+       [style.height.px]="viewBoxHeight">
+    <div *ngFor="let tile of tiles" style="position: relative; float: left;"
+          [style.width.px]="tileWidth * zoomFactor"
+          [style.height.px]="tileHeight">
+      <explore-image *ngIf="isVisible(tile)"
+                     [src]="tile.spectrumUrl"
+                     [width]="tileWidth"
+                     [height]="tileHeight"></explore-image>
+    </div>
+    <div style="position: relative; float: none;"
+         [style.width.px]="tileWidthLast * zoomFactor"
+         [style.height.px]="tileHeight"><span *ngIf="lastTile">{{lastTile.spectrumUrl}}</span>
+      <explore-image *ngIf="lastTile"
+                     [src]="lastTile.spectrumUrl"
+                     [width]="tileWidthLast"
+                     [height]="tileHeight"></explore-image>
+    </div>
+    <div *ngFor="let tile of tiles" style="position: relative; float: left;"
+         [style.width.px]="tileWidth * zoomFactor"
+         [style.height.px]="tileHeight">
+      <explore-image *ngIf="isVisible(tile)"
+                     [src]="tile.waveformUrl"
+                     [width]="tileWidth"
+                     [height]="tileHeight"></explore-image>
+    </div>
+    <div style="position: relative; float: left;"
+         [style.width.px]="tileWidthLast * zoomFactor"
+         [style.height.px]="tileHeight">
+      <explore-image *ngIf="lastTile"
+                     [src]="lastTile.waveformUrl"
+                     [width]="tileWidthLast"
+                     [height]="tileHeight"></explore-image>
+    </div>
+  </div>
+</div>

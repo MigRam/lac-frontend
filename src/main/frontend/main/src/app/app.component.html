@@ -1,0 +1,32 @@
+<main>
+  <router-outlet>
+    <div id="header">
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href=".">KA<sup>3</sup></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li routerLink="/admin" routerLinkActive="active"><a routerLink="/admin">Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li routerLink="/annotations" routerLinkActive="active"><a routerLink="/annotations">Annotations</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li routerLink="/upload" routerLinkActive="active"><a routerLink="/upload">Upload</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li routerLink="/explore" routerLinkActive="active"><a routerLink="/explore">Explore</a></li>
+            </ul>
+            <ul align="right" style="align-self:right" class="navbar-right">
+              <a href="https://grails-dev.rrz.uni-koeln.de/ka3-test/samlLogin" class="btn btn-success">Uzk/Institutional Sign in</a>
+              <a href="https://grails-dev.rrz.uni-koeln.de/ka3-test/login/auth" class="btn btn-success">Admin Account Sign in</a>
+              <a href="https://grails-dev.rrz.uni-koeln.de/ka3-test/samlLogin" class="btn btn-success">Logout</a>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </router-outlet>
+</main>

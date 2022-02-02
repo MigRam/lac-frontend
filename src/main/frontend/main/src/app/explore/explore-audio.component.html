@@ -1,0 +1,4 @@
+<i class="fa fa-spinner" *ngIf="!audioAvailable"></i>
+<audio *ngIf="audioSrc && audioAvailable" autoplay controls>
+  <source [src]="src">
+</audio>

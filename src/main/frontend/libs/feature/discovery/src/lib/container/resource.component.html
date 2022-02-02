@@ -1,0 +1,51 @@
+<ng-template #showLoader>
+  <mat-spinner diameter="25" color="warn"></mat-spinner>
+</ng-template>
+<section *ngIf="resourceData$ |async as data; else showLoader">
+    <mat-grid-list cols="6" rowHeight="300px">
+        <mat-grid-tile colspan="2" rowspan="1">
+            <mat-list dense>
+                <mat-list-item>
+                    <div mat-card-avatar>
+                        <ui-discovery-icons [fileType]="data.getType()" [iconSize]="'3x'"></ui-discovery-icons>
+                    </div>
+                    <h1 class="mat-title" [innerHTML]="data.getTitle()"></h1>
+                    <a mat-button [href]="downloadUrl" download>
+                        <fa-icon [icon]="faSave" [size]="'2x'"></fa-icon>
+                    </a>
+                </mat-list-item>
+                <mat-list-item>
+                </mat-list-item>
+                <mat-list-item>
+                    <label for="Creation date">File Created: </label>
+                    <span [innerHTML]="data.getCreationDate() | date:'medium'"></span>
+                </mat-list-item>
+                <mat-list-item>
+                    <label for="Update date">File Updated: </label>
+                    <span [innerHTML]="data.getUpdateDate() | date:'medium'"></span>
+                </mat-list-item>
+                <mat-list-item>
+                    <label for="Size">File Size: </label>
+                    <span [innerHTML]="data.getFileSize()"></span>
+                </mat-list-item>
+            </mat-list>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="4" rowspan="3">
+            <div *ngIf="data.getType().startsWith('video')">
+                <ui-video [videoSource]="src(data.id)" [videoType]="data.getType()"></ui-video>
+            </div>
+            <div *ngIf="data.getType().startsWith('audio')">
+                <ui-audio [audioSource]="src(data.id)" [audioType]="data.getType()"></ui-audio>
+            </div>
+            <div *ngIf="data.getType().startsWith('image')">
+                <ui-picture [imageSource]="src(data.id)"></ui-picture>
+            </div>
+            <div *ngIf="data.getType().endsWith('pdf')">
+                <ui-pdf [pdfSource]="src(data.id)"></ui-pdf>
+            </div>
+            <div *ngIf="data.getType().startsWith('text')">
+                <iframe [src]="src(data.id)" style="border: none"></iframe>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</section>

@@ -1,0 +1,87 @@
+{
+  "npmScope": "frontend",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "lac-portal-e2e": {
+      "tags": []
+    },
+    "lac-portal": {
+      "tags": []
+    },
+    "auth": {
+      "tags": []
+    },
+    "data": {
+      "tags": []
+    },
+    "feature-discovery": {
+      "tags": []
+    },
+    "feature-docs": {
+      "tags": []
+    },
+    "feature-account": {
+      "tags": []
+    },
+    "feature-deposit": {
+      "tags": []
+    },
+    "feature-admin": {
+      "tags": []
+    },
+    "feature-elan-player": {
+      "tags": []
+    },
+    "ui-material-design": {
+      "tags": []
+    },
+    "ui-searchbar": {
+      "tags": []
+    },
+    "ui-leaflet": {
+      "tags": []
+    },
+    "ui-pipes": {
+      "tags": []
+    },
+    "ui-media": {
+      "tags": []
+    },
+    "ui-icons": {
+      "tags": []
+    },
+    "lac-admin-e2e": {
+      "tags": []
+    },
+    "lac-admin": {
+      "tags": []
+    },
+    "lac-react-portal": {
+      "tags": []
+    },
+    "lac-react-portal-e2e": {
+      "tags": []
+    },
+    "ui-core": {
+      "tags": []
+    },
+    "lac-deposit-e2e": {
+      "tags": []
+    },
+    "lac-deposit": {
+      "tags": []
+    },
+    "lac-av-services-e2e": {
+      "tags": []
+    },
+    "lac-av-services": {
+      "tags": []
+    }
+  }
+}

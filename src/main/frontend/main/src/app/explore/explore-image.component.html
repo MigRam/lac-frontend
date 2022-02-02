@@ -1,0 +1,9 @@
+<div [style.width.px]="width"
+    [style.height.px]="height">
+  <div style="position: relative; display: block;"
+       *ngIf="!imageAvailable">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+  <img [src]="imageSrc" width="100%" height="100%"
+       *ngIf="imageAvailable"/>
+</div>

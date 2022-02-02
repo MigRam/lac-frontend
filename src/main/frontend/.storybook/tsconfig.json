@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "exclude": [
+    "../stories/test.ts",
+    "../stories/**/*.spec.ts",
+    "../apps/**/*.spec.ts",
+    "../apps/lac-admin-e2e/**/*",
+    "../apps/lac-portal-e2e/**/*",
+    "../libs/**/*.spec.ts"
+  ],
+  "include": ["../stories/**/*", "../apps/**/*", "../libs/**/*"]
+}

@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="row" style="background: #f8f8f8">
+    <div class="col-md8 col-lg-8">
+      <h1>Annotations Search</h1>
+      <small *ngIf="hits">{{hits.odataCount}} Hits.</small>
+      <h2 class="input-group">
+        <input type="text" class="form-control input-lg"
+               (keyup.enter)="onSearch()"
+               [(ngModel)]="selector.search"
+               (input)="onSearch()">
+        <span id="searchbutton" class="input-group-btn">
+          <button class="btn btn-danger btn-lg" type="button"
+                  (click)="onSearch()">
+            <span class="fa fa-search"></span>
+          </button>
+        </span>
+      </h2>
+    </div>
+    <div class="col-md-4 col-lg-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-md8 col-lg-8" *ngIf="hits">
+      <template let-hit ngFor [ngForOf]="hits.value" let-i="index">
+        <div class="row" *ngIf="i == 0 || hit.target != hits.value[i - 1].target">
+          <div class="col-md-12">{{hit.target.split("/").slice(0, 2).join("/")}}</div>
+        </div>
+        <div style="position: relative; float:left; width: 100%;">
+          <div class="position: relative; float: left;">
+            <div class="row">
+              <div class="col-md-4">
+                <a [routerLink]="annotationLink(hit)">
+                  <strong *ngFor="let highlight of hit.a5Highlight">
+                    <span *ngIf="highlight.fieldName == 'bodyValue'" style="font-size: 1.5em;">
+                      <!--Here comes the link to the hit-->
+                      <span [innerHTML]="highlight.matched"></span>
+                    </span>
+                  </strong>
+                </a>
+              </div>
+
+              <div class="col-md-8">
+                <span *ngIf="playSegments[i] == false" (click)="onPlaySegment(i)" style="font-size: 1.5em;">
+                  <!--Here comes the play button-->
+                  <i class="fa fa-play-circle-o"></i>
+                </span>
+                <!--Here comes the mini player-->
+                <explore-audio *ngIf="playSegments[i] == true" [src]="mediaFragmentLink(hit)"></explore-audio>
+              </div>
+          </div>
+        </div>
+        </div>
+      </template>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-4 col-lg-4" *ngIf="hits">
+      <div *ngFor="let facet of hits.a5Facets" class="text-right">
+        <h4 class="text-danger">{{facet.faceName.split(".")[1]}}</h4>
+        <div *ngFor="let bucket of facet.buckets">
+          <button class="btn-link"
+                  *ngIf="!facetSelected(facet.faceName, bucket.key)"
+                  (click)="selectFacet(facet.faceName, bucket.key)">{{bucket.key}} ({{bucket.doc_count}})</button>
+          <button class="btn btn-danger"
+                  *ngIf="facetSelected(facet.faceName, bucket.key)"
+                  (click)="deselectFacet(facet.faceName, bucket.key)">{{bucket.key}} ({{bucket.doc_count}})</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

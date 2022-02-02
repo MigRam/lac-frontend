@@ -1,0 +1,24 @@
+<mat-form-field appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-label> &nbsp; LAC Global Search </mat-label>
+    <input matInput type="text" placeholder="Search" #bar [formControl]="queryInput" [matAutocomplete]="auto" autofocus>
+
+    <button mat-button *ngIf="bar.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon matSuffix>close</mat-icon>
+    </button>
+
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="bar.value">
+        <mat-option *ngIf="searchbarStream?.inProgress">
+            <mat-spinner diameter="25"></mat-spinner>
+        </mat-option>
+      <div *ngIf="searchbarStream?.ODataHits$ | async as data">
+        <mat-option *ngFor="let option of data?.getAutocompletes()" [value]="option?.key">
+          <span [innerHTML]="option.key | highlight:bar.value"> </span> | <span [innerHTML]="option.doc_count"></span> Hits.
+        </mat-option>
+      </div>
+    </mat-autocomplete>
+
+    <mat-hint>
+        <span [innerHTML]="msg"></span>
+    </mat-hint>
+</mat-form-field>

@@ -1,0 +1,48 @@
+<div class="container-fluid"
+     *ngIf="odata">
+  <div class="row">
+    <div class="embed-responsive col col-xs-12 col-sm-12 col-md-12 col-lg-12"
+         *ngIf="isAudio()">
+      <button type="button" class="btn btn-primary"
+              *ngIf="odata"
+              (click)="close()">Close</button>
+      <audio class="embed-responsive-item" controls>
+        <source [src]="src()" [type]="type()">
+      </audio>
+    </div>
+    <div class="embed-responsive col col-xs-12 col-sm-12 col-md-12 col-lg-12"
+         *ngIf="isImage()" >
+      <button type="button" class="btn btn-primary" style="bottom: 0;"
+              *ngIf="odata"
+              (click)="close()">Close</button>
+      <img class="embed-responsive-item" [src]="src()">
+    </div>
+    <div class="embed-responsive col col-xs-12 col-sm-12 col-md-12 col-lg-12"
+         *ngIf="isPdf()" >
+      <button type="button" class="btn btn-primary" style="bottom: 0;"
+              *ngIf="odata"
+              (click)="close()">Close</button>
+      <iframe class="embed-responsive-item"
+              [src]="src()" style="border: none">
+        <a [href]="src"></a>
+      </iframe>
+    </div>
+    <div class="embed-responsive col col-xs-12 col-sm-12 col col-md-12 col-lg-12"
+         *ngIf="isVideo()">
+      <button type="button" class="btn btn-primary"
+              *ngIf="odata"
+              (click)="close()">Close</button>
+      <video class="embed-responsive-item" controls>
+        <source [src]="src()" [type]="type()">
+      </video>
+    </div>
+    <div class="embed-responsive col col-xs-12 col-sm-12 col-md-12 col-lg-12"
+         *ngIf="isText()">
+      <button type="button" class="btn btn-primary" style="bottom: 0;"
+              *ngIf="odata"
+              (click)="close()">Close</button>
+      <iframe class="embed-responsive-item"
+              [src]="src()" style="border: none"></iframe>
+    </div>
+  </div>
+</div>

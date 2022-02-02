@@ -1,0 +1,19 @@
+<small *ngIf="exploreService.odataQuery">{{exploreService.odataQuery.odataCount}} Hits.</small>
+<h1 class="input-group">
+  <input type="text" class="form-control input-lg" list="autocomplete"
+         (keyup.enter)="onInputBlur($event.target)"
+         [(ngModel)]="exploreService.selectorQuery.search"
+         (input)="onInput($event.target)">
+  <datalist id="autocomplete"
+            *ngIf="exploreService.odataQuery">
+    <option *ngFor="let autocomplete of exploreService.odataQuery.a5Autocomplete"
+            value="{{autocomplete.key}}">{{autocomplete.key}} ({{autocomplete.doc_count}})</option>
+  </datalist>
+  <span id="searchbutton" class="input-group-btn">
+    <button class="btn btn-danger btn-lg" type="button"
+            (click)="onSearch()">
+      <span class="fa fa-search"></span>
+    </button>
+  </span>
+</h1>
+<explore-search-facets></explore-search-facets>

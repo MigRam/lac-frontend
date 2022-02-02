@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@frontend/auth": ["libs/auth/src/index.ts"],
+      "@frontend/data": ["libs/data/src/index.ts"],
+      "@frontend/feature/discovery": ["libs/feature/discovery/src/index.ts"],
+      "@frontend/feature/docs": ["libs/feature/docs/src/index.ts"],
+      "@frontend/feature/account": ["libs/feature/account/src/index.ts"],
+      "@frontend/feature/deposit": ["libs/feature/deposit/src/index.ts"],
+      "@frontend/feature/admin": ["libs/feature/admin/src/index.ts"],
+      "@frontend/feature/elan-player": [
+        "libs/feature/elan-player/src/index.ts"
+      ],
+      "@frontend/ui/pipes": ["libs/ui/pipes/src/index.ts"],
+      "@frontend/ui/media": ["libs/ui/media/src/index.ts"],
+      "@frontend/ui/icons": ["libs/ui/icons/src/index.ts"],
+      "@frontend/ui/leaflet": ["libs/ui/leaflet/src/index.ts"],
+      "@frontend/ui/searchbar": ["libs/ui/searchbar/src/index.ts"],
+      "@frontend/ui/material-design": ["libs/ui/material-design/src/index.ts"],
+      "core": ["dist/core"],
+      "core/*": ["dist/core/*"],
+      "@frontend/ui/core": ["libs/ui/core/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"],
+  "include": []
+}

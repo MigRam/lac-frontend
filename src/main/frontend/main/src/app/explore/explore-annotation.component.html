@@ -1,0 +1,42 @@
+<div class="explore-annotation">
+  <div class="row">
+    <div class="col-md-3">
+      <div *ngIf="odataBundle && odataManifest && odataCanvas">
+        <h3>{{odataManifest.label}} <small>{{odataBundle.Title}}</small></h3>
+        <p *ngIf="odataBundle.ObjectLanguage">{{odataBundle.ObjectLanguage.join(", ")}}</p>
+        <p *ngIf="odataBundle.Keywords">{{odataBundle.Keywords.join(", ")}}</p>
+        <p *ngIf="odataBundle.Creator">{{odataBundle.Creator.join(", ")}}</p>
+        <p *ngIf="odataCanvas.media && odataCanvas.media[0]" style="word-break: break-all">{{odataCanvas.media[0].fileUri}}</p>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <explore-annotation-waveform
+        #viewChildWaveform
+        [odataCanvas]="odataCanvas"></explore-annotation-waveform>
+      <explore-annotation-controls
+        #viewChildAudio
+        [odataCanvas]="odataCanvas"
+        (onLoadedMetadata)="onLoadedMetadata()"
+        (onPlay)="onPlay()"
+        (onPause)="onPause()"
+        (onSeeked)="onSeeked()"></explore-annotation-controls>
+      <!--input type="range" min="0.5" max="2" step="0.01" value="1"
+             (input)="sliderChange($event)"-->
+      <div class="text-right">{{scrollValue}}%</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <explore-annotation-tree
+        #viewChildTree
+        [odataLayers]="odataLayers"></explore-annotation-tree>
+    </div>
+    <div class="col-md-9">
+      <explore-annotation-text
+        #viewChildText
+        [odataCanvas]="odataCanvas"
+        [odataLayers]="odataLayers"
+        (onScroll)="onScroll($event)"></explore-annotation-text>
+    </div>
+  </div>
+</div>

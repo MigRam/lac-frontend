@@ -1,0 +1,11 @@
+<div style="width: 100%">
+    <audio style="width: 100%"
+           #audio controls
+           *ngIf="odataCanvas && odataCanvas.media"
+           (loadedmetadata)="emitLoadedMetadata()"
+           (play)="emitPlay()"
+           (pause)="emitPause()"
+           (seeked)="emitSeeked()">
+        <source [src]="mediaSrc()">
+    </audio>
+</div>

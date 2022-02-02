@@ -1,0 +1,44 @@
+<section *ngIf="collectionData$ | async as collection; else showLoader">
+    <mat-card *ngFor="let data of collection.getDataset()">
+        <mat-card-header>
+            <span mat-card-avatar>
+                <ui-discovery-icons [fileType]="data.getType()" [iconSize]="'2x'"></ui-discovery-icons>
+            </span>
+            <mat-card-title>
+                <h1 class="mat-headline" [innerHTML]="data?.getTitle()"></h1>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let keyword of data?.getKeywords()" color="isKeyword" selected>
+                        <span [innerHTML]="keyword"></span>
+                    </mat-chip>
+                    <mat-chip *ngFor="let language of data?.getLanguages()" color="isLanguage" selected>
+                        <span [innerHTML]="language"></span>
+                    </mat-chip>
+                    <mat-chip *ngFor="let country of data?.getCountry()" color="isLocation" selected>
+                        <span [innerHTML]="country"></span>
+                    </mat-chip>
+                    <mat-chip *ngFor="let location of data?.getLocation()" color="isLocation" selected>
+                        <span [innerHTML]="location"></span>
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p [innerHTML]="data?.getProjectDescription() || data?.getDescription()"></p>
+        </mat-card-content>
+        <mat-card-actions>
+            <ui-discovery-resource-icons [resource]="data?.getResourceType()" [iconSize]="'2x'">
+            </ui-discovery-resource-icons>
+        </mat-card-actions>
+        <mat-card-content>
+            <p>List of Bundles:</p>
+            <div *ngIf="collectionBundles$ | async as bundles; else showLoader">
+                <frontend-collection-table [data]="bundles.getFileParentOf()" (bundleEmitter)="viewBundle($event)"></frontend-collection-table>
+            </div>
+            <ng-template #showLoader>
+                <mat-spinner diameter="25" color="warn"></mat-spinner>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</section>

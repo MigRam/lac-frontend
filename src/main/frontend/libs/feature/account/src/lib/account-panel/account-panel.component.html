@@ -1,0 +1,26 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [attr.role]="'navigation'" mode="side" opened>
+    <ng-container *frontendUserStatus="true">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon>account_box</mat-icon>
+          <a mat-button [routerLink]="['/account']" routerLinkActive="router-link-active">
+            {{(user$ | async)?.username}}
+          </a>
+        </mat-list-item>
+        <mat-list-item *ngFor="let role of (user$ | async)?.roles">
+          <mat-icon> account_balance </mat-icon>
+          <a> {{ role | lowercase }} </a>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>cloud_circle</mat-icon>
+          <a mat-button [routerLink]="'/account/deposit'">Deposit</a>
+        </mat-list-item>
+      </mat-list>
+    </ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

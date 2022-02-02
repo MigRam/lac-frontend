@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container mat-typography">
+
+    <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'navigation' : 'navigation'" [mode]="(isHandset$ | async) ? 'side' : 'side'" [opened]="(isHandset$ | async) === true" opened>
+
+        <button mat-button color="warn">Clear All</button>
+        <frontend-discovery-facets></frontend-discovery-facets>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <section fxLayout="column" fxLayout.xs="column" fxFlexAlign="center center" class="content">
+            <section fxFlex="50%">
+
+                <div #mapContainer></div>
+
+                <ng-container *ngIf="ODataQueryCollection$ | async as hits; else showExplorePanel">
+                    <frontend-discovery-hits *ngFor="let hit of hits" [hit]="hit"></frontend-discovery-hits>
+                </ng-container>
+            </section>
+
+            <ng-template #showExplorePanel>
+                <mat-hint [innerHTML]="exploreHint"></mat-hint>
+                <section fxLayout="row" fxLayout.xs="column">
+                    <section fxFlex="50%">
+                        <h2> LANGUAGES </h2>
+                        <mat-list *ngIf="ODataQueryFacets$ | async as facets">
+                            <mat-list-item *ngFor="let facet of facets[2].buckets">
+                                <a mat-button> {{ facet['key'] }} </a>
+                                <mat-chip> {{ facet['doc_count'] }} </mat-chip>
+                            </mat-list-item>
+                        </mat-list>
+                    </section>
+
+                    <section fxFlex="40%">
+                        <h2> COUNTRIES </h2>
+                        <mat-list *ngIf="ODataQueryFacets$ | async as facets">
+                            <mat-list-item *ngFor="let facet of facets[1].buckets">
+                                <a mat-button> {{ facet['key'] }} </a>
+                                <mat-chip> {{ facet['doc_count'] }} </mat-chip>
+                            </mat-list-item>
+                        </mat-list>
+                    </section>
+
+                    <section fxFlex="50%">
+                        <h2> KEYWORDS </h2>
+                        <mat-list *ngIf="ODataQueryFacets$ | async as facets">
+                            <mat-list-item *ngFor="let facet of facets[0].buckets">
+                                <a mat-button> {{ facet['key'] }} </a>
+                                <mat-chip> {{ facet['doc_count'] }} </mat-chip>
+                            </mat-list-item>
+                        </mat-list>
+                    </section>
+                </section>
+            </ng-template>
+        </section>
+    </mat-sidenav-content>
+</mat-sidenav-container>

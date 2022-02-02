@@ -1,0 +1,12 @@
+export { UserGuideComponent } from './user-guide.component';
+export { TermsOfUseComponent } from './terms-of-use.component';
+export { MissionStatementComponent } from './mission-statement.component';
+export { DepositorAgreementComponent } from './depositor-agreement.component';
+export { DataUserAgreementComponent } from './data-user-agreement.component';
+export { DepositorGuidelinesComponent } from './depositor-guidelines.component';
+export { SubmissionGuidelinesComponent } from './submission-guidelines.component';
+export { DepositingPolicyComponent } from './depositing-policy.component';
+export { FormatWhitelistComponent } from './format-whitelist.component';
+export { ArchiveSetupComponent } from './archive-setup.component';
+export { PrivacyPolicyComponent } from './privacy-policy.component';
+export { GuidesIndexComponent } from './guides-index.component';

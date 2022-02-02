@@ -1,0 +1,29 @@
+<span [ngSwitch]="fileType">
+    <span *ngSwitchCase="'Collection'">
+        <fa-icon [icon]="faArchive" [size]="iconSize" pull="left"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'Bundle'">
+        <fa-icon [icon]="faFile" [size]="iconSize" pull="left"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'video/mp4'">
+        <fa-icon [icon]="faVideo" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'audio/x-wav'">
+        <fa-icon [icon]="faAudio" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'text/eaf+xml'">
+        <fa-icon [icon]="faCode" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'text/x-eaf+xml'">
+        <fa-icon [icon]="faCode" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'application/pdf'">
+        <fa-icon [icon]="faPDF" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchCase="'image/jpeg'">
+        <fa-icon [icon]="faImage" [size]="iconSize"></fa-icon>
+    </span>
+    <span *ngSwitchDefault>
+        <fa-icon [icon]="faText" [size]="iconSize"></fa-icon>
+    </span>
+</span>

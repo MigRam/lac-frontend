@@ -1,0 +1,27 @@
+<div *ngIf="isLandingPage()">
+    <fa-icon [icon]="faFile" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isMetadata()">
+    <fa-icon [icon]="faFileAlt" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isVideo()">
+    <fa-icon [icon]="faPlay" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isAudio()">
+    <fa-icon [icon]="faHeadphones" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isText() ||isXML()">
+    <fa-icon [icon]="faEye" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isPDF()">
+    <fa-icon [icon]="faEye" [size]="iconSize"></fa-icon>
+</div>
+
+<div *ngIf="isImage()">
+    <fa-icon [icon]="faEye" [size]="iconSize"></fa-icon>
+</div>

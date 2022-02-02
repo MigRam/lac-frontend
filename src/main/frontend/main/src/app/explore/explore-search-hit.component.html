@@ -1,0 +1,143 @@
+<div class="well">
+  <div class="row"
+       *ngIf="exploreService.isHit() && exploreService.odataQuery">
+    <div class="col-md-12 col-lg-12 text-center">
+      <span class="pull-left">{{exploreService.selectorQuery.skip + 1}}/{{exploreService.odataQuery.odataCount}}</span>
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="previousHit()"
+              [class.disabled]="isFirstHit()">
+        <span aria-hidden="true">&larr;</span> Previous
+      </button>
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="nextHit()"
+              [class.disabled]="isLastHit()">Next <span aria-hidden="true">&rarr;</span></button>
+      <button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close"
+              (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-8"
+         *ngIf="exploreService.odataObject">
+      <div
+        *ngFor="let session of exploreService.odataQuery.value">
+        <h2>{{session.Type}}: {{ session.ProjectDisplayName || session.Title || "?"}}
+          <small *ngIf="(session.Title != session.ProjectDisplayName)">{{session.Title || session.ProjectDisplayName || "?"}}</small></h2>
+        <h3>Keywords</h3>
+        <p *ngIf="session.Keywords">{{ session.Keywords.join(", ") }}</p>
+        <h3>{{ 'Description' | uppercase }}</h3>
+        <p>{{ session.ProjectDescription }}</p>
+        <p>{{ session.Description }}</p>
+        <dl>
+          <dt>Object Language</dt>
+          <dd>{{ session.ObjectLanguage || "?"}}</dd>
+          <dt>Location</dt>
+          <dd>{{ [session.Country, session.Region, session.Location].join(", ") || "?"}}</dd>
+          <dt>Creator</dt>
+          <dd>{{ session.Creator || "?" }}</dd>
+        </dl>
+      </div>
+      <h3>Annotations</h3>
+      <div class="media-list">
+        <a class="media"
+           *ngFor="let entity of exploreService.odataObject.parentOf"
+           routerLink="/explore/annotation/{{entity.id}}">
+          <div class="media-left"
+               *ngIf="isAnnotation(entity)">
+            <span style="font-size: 64px;" class="fa fa-comment-o"></span>
+          </div>
+          <div class="media-body row"
+               *ngIf="isAnnotation(entity)">
+            <div class="col col-md-9">
+              <ul class="list-unstyled">
+                <li>{{entity.label || "?"}}</li>
+              </ul>
+            </div>
+            <div class="col col-md-3">
+              <span style="font-size: 32px;" class="fa fa-play pull-right"></span>
+            </div>
+            <hr>
+          </div>
+        </a>
+      </div>
+      <h3>Resources</h3>
+      <div class="media-list"
+           *ngIf="exploreService.odataObject">
+        <a class="media"
+           *ngFor="let entity of exploreService.odataObject.parentOf"
+           (click)="exploreService.showMedia(entity)">
+          <div class="media-left"
+               *ngIf="isAudio(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-audio-o"></span>
+          </div>
+          <div class="media-left"
+               *ngIf="isVideo(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-video-o"></span>
+          </div>
+          <div class="media-left"
+               *ngIf="isImage(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-image-o"></span>
+          </div>
+          <div class="media-left"
+               *ngIf="isText(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-text-o"></span>
+          </div>
+          <div class="media-left"
+               *ngIf="isPdf(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-pdf-o"></span>
+          </div>
+          <div class="media-left"
+               *ngIf="isFile(entity)">
+            <span style="font-size: 64px;" class="fa fa-file-o"></span>
+          </div>
+          <div class="media-body row">
+            <div class="col-md-9">
+              <ul class="list-unstyled">
+                <li>{{entity.label || "?"}}</li>
+              </ul>
+            </div>
+            <div class="col-md-3"
+                 *ngIf="isImage(entity) || isFile(entity)">
+              <span style="font-size: 32px;" class="fa fa-eye pull-right"></span>
+            </div>
+            <div class="col-md-3"
+                 *ngIf="isAudio(entity) || isVideo(entity)">
+              <span style="font-size: 32px;" class="fa fa-play-circle-o pull-right"></span>
+            </div>
+          </div>
+          <hr>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div *ngIf="exploreService.odataParentObject && exploreService.odataParentQuery">
+        <h4>Is part of collection:</h4>
+        <h3>{{exploreService.odataParentQuery.value[0].Title || exploreService.odataParentQuery.value[0].ProjectDisplayName ||
+          exploreService.odataParentObject.label || "?"}}</h3>
+        <small>
+          <dl>
+            <dt>Object Languages</dt>
+            <dd>{{exploreService.odataParentQuery.value[0].ObjectLanguage || "?"}}</dd>
+            <dt>Location</dt>
+            <dd>{{exploreService.odataParentQuery.value[0].Country || "?"}}</dd>
+            <dt>Project</dt>
+            <dd>{{exploreService.odataParentQuery.value[0].Description || "?"}}</dd>
+            <dt>Responsible Person</dt>
+            <dd>{{exploreService.odataParentQuery.value[0].Creator || "?"}}</dd>
+            <dt>Sessions in this Collection</dt>
+            <dd>
+              <ul class="list-unstyled">
+                <li style="word-break: break-all; border-bottom: solid lightgrey 1px; margin-bottom: .5em;"
+                    *ngFor="let pof of parentOf()">
+                  <a>{{ pof }}</a>
+                </li>
+              </ul>
+            </dd>
+          </dl>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
